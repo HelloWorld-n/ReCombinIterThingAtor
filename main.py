@@ -9,7 +9,7 @@ def next_thing(source, element):
 			except IndexError:
 				return IndexError
 
-def combine(available, lenght):
+def combine(available, lenght, needsUnique = False):
 	x = []
 
 	for prepare in range(lenght):
@@ -22,7 +22,8 @@ def combine(available, lenght):
 			x[mostright] = available[0]
 			mostright -= 1
 		x[mostright] = next_thing(available, x[mostright])
-		yield copy.copy(x)
+		if not needsUnique or unique(x):
+			yield copy.copy(x)
 
 
 def embasy(tm, base = 10):
@@ -46,9 +47,8 @@ def unique(collection):
 if __name__ == "__main__":
 	thing = [0, 2, 4, 5, 6, 7]	
 	try:
-		for combination in combine(thing, len(thing)):
-			if unique(combination):
-				if embasy(combination[:2]) * embasy(combination[2:3]) == embasy(combination[3:]):
-					print(combination)
+		for combination in combine(thing, len(thing), needsUnique = True):
+			if embasy(combination[:2]) * embasy(combination[2:3]) == embasy(combination[3:]):
+				print(combination)
 	except IndexError:
 		pass
