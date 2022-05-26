@@ -11,11 +11,8 @@ def next_thing(source, element):
 
 def combine(available, lenght, needsUnique = False):
 	x = []
-
 	for prepare in range(lenght):
 		x += [available[0]]
-
-	print(x)
 	while True:
 		mostright = -1
 		while next_thing(available, x[mostright]) == IndexError:
@@ -25,14 +22,12 @@ def combine(available, lenght, needsUnique = False):
 		if not needsUnique or unique(x):
 			yield copy.copy(x)
 
-
 def embasy(tm, base = 10):
 	result = 0
 	for i in tm:
 		result += i
 		result *= base
 	return result // base
-		
 
 def unique(collection):
 	for item in collection:
@@ -51,4 +46,4 @@ if __name__ == "__main__":
 			if embasy(combination[:2]) * embasy(combination[2:3]) == embasy(combination[3:]):
 				print(combination)
 	except IndexError:
-		pass
+		print("Complete!")
