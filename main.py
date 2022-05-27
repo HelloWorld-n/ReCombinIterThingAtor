@@ -52,7 +52,13 @@ if __name__ == "__main__":
 		sizes[1] = int(input("Enter sizes[1]: "))
 
 	for i in range(amountOfDigits):
-		thing.append(int(input(f"Enter digit[{i}]: ")))	
+		thing.append(None)
+		while thing[i] == None or not -1 < thing[i] < 10:
+			thing[i] = int(input(f"Enter digit[{i}]: "))
+			for ii in range(len(thing) - 1):
+				if thing[ii] == thing[i] and not ii == i:
+					thing[i] = None
+					print("Digits already there!")	
 	try:
 		for combination in combine(thing, len(thing), needsUnique = True):
 			if embasy(combination[:sizes[0]]) * embasy(combination[sizes[0]:(sizes[0] + sizes[1])]) == embasy(combination[sizes[0] + sizes[1]:]):
